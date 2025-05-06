@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  ollama:
+    build: ./llm
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./files/ollama_data:/root/.ollama
+    restart: unless-stopped
+
+  notebook:
+    image: jupyter/scipy-notebook
+    container_name: llm-notebook
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./files:/home/jovyan/work
+    environment:
+      - JUPYTER_TOKEN=123456
+    depends_on:
+      - ollama
+
+volumes:
+  ollama_data:
