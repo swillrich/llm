@@ -3,3 +3,7 @@ __pycache__/
 ollama_data/
 .ipynb_checkpoints/
 .env
+env.env
+test_data/*.json
+./pgdata
+*.joblib

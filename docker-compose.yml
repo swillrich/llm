@@ -10,6 +10,18 @@ services:
       - ./files/ollama_data:/root/.ollama
     restart: unless-stopped
 
+  pgvector:
+    image: ankane/pgvector
+    container_name: pgvector
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: vector_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
   notebook:
     image: jupyter/scipy-notebook
     container_name: llm-notebook
